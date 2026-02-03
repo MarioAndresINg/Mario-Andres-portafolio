@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Almacén JR - Llantas para Motos en Ibagué</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header with animation */
+        header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,107,0,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            color: #ff6b00;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInDown 1s;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Navigation */
+        nav {
+            background: #ff6b00;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.7rem 1.8rem;
+            display: block;
+            font-weight: 600;
+            transition: all 0.3s;
+            border-radius: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
+
+        nav a:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        nav a:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Sections */
+        section {
+            padding: 4rem 0;
+        }
+
+        section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #1a1a1a;
+            position: relative;
+            padding-bottom: 1rem;
+            animation: fadeIn 1s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #ff6b00, transparent);
+            animation: expandWidth 1s;
+        }
+
+        @keyframes expandWidth {
+            from { width: 0; }
+            to { width: 100px; }
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://cdn.pixabay.com/photo/2016/11/29/01/34/man-1866572_1280.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            text-align: center;
+            padding: 6rem 2rem;
+            position: relative;
+        }
+
+        .hero h2 {
+            color: white;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+        }
+
+        .hero h2::after {
+            background: linear-gradient(90deg, transparent, white, transparent);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Tire Grid with Enhanced Effects */
+        .tire-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+
+        .tire-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        .tire-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,107,0,0.15) 0%, rgba(255,107,0,0) 100%);
+            opacity: 0;
+            transition: opacity 0.4s;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .tire-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 20px 50px rgba(255,107,0,0.4);
+        }
+
+        .tire-card:hover::before {
+            opacity: 1;
+        }
+
+        .tire-card-header {
+            background: linear-gradient(135deg, #ff6b00 0%, #ff8533 100%);
+            padding: 1.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tire-card-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+            animation: rotate 15s linear infinite;
+        }
+
+        .tire-card h3 {
+            color: white;
+            margin: 0;
+            font-size: 1.8rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .tire-image-container {
+            position: relative;
+            width: 100%;
+            height: 280px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #f8f8f8 0%, #e0e0e0 100%);
+        }
+
+        .tire-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease, filter 0.3s;
+            filter: brightness(1);
+        }
+
+        .tire-card:hover .tire-image {
+            transform: scale(1.15) rotate(3deg);
+            filter: brightness(1.1);
+        }
+
+        .tire-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #ff6b00 0%, #ff4500 100%);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            box-shadow: 0 5px 15px rgba(255,107,0,0.5);
+            animation: pulse 2s infinite;
+            z-index: 2;
+        }
+
+        @keyframes pulse {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 0 5px 15px rgba(255,107,0,0.5);
+            }
+            50% { 
+                transform: scale(1.08);
+                box-shadow: 0 8px 20px rgba(255,107,0,0.7);
+            }
+        }
+
+        .tire-content {
+            padding: 2rem;
+        }
+
+        .tire-list {
+            list-style: none;
+        }
+
+        .tire-list li {
+            padding: 1rem 0;
+            border-bottom: 2px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .tire-list li:hover {
+            background: #f8f8f8;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            margin: 0 -1rem;
+            border-radius: 8px;
+            border-bottom: 2px solid #ff6b00;
+        }
+
+        .tire-list li:last-child {
+            border-bottom: none;
+        }
+
+        .tire-brand {
+            font-weight: 600;
+            color: #333;
+            font-size: 1.05rem;
+        }
+
+        .tire-price {
+            color: #ff6b00;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        /* Services with animations */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, #fff 0%, #f8f8f8 100%);
+            padding: 2.5rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.4s;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,107,0,0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .service-card:hover::before {
+            left: 100%;
+        }
+
+        .service-card:hover {
+            border-color: #ff6b00;
+            background: white;
+            box-shadow: 0 10px 30px rgba(255,107,0,0.2);
+            transform: translateY(-10px);
+        }
+
+        .service-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .service-card:hover .service-icon {
+            animation: spin 0.6s ease;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.2); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        .service-card h3 {
+            color: #1a1a1a;
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
+        }
+
+        /* Contact Section */
+        #contacto {
+            background: linear-gradient(135deg, #f8f8f8 0%, #e8e8e8 100%);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(255,107,0,0.2);
+        }
+
+        .contact-card h3 {
+            color: #ff6b00;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-size: 1.5rem;
+        }
+
+        .contact-icon {
+            font-size: 1.8rem;
+            animation: bounce 2s infinite;
+        }
+
+        .whatsapp-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #25D366 0%, #20ba5a 100%);
+            color: white;
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.4s;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+            margin-top: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .whatsapp-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .whatsapp-btn:hover::before {
+            width: 400px;
+            height: 400px;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.6);
+        }
+
+        .whatsapp-btn::after {
+            content: '💬 ';
+            margin-right: 0.5rem;
+        }
+
+        /* Map */
+        .map-container {
+            margin-top: 2rem;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            height: 450px;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 3rem;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ff6b00, transparent);
+        }
+
+        /* Floating WhatsApp Button */
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #25D366 0%, #20ba5a 100%);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 1000;
+            text-decoration: none;
+            animation: floatBounce 3s infinite;
+        }
+
+        @keyframes floatBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .floating-whatsapp:hover {
+            transform: scale(1.15) rotate(15deg);
+            box-shadow: 0 12px 35px rgba(37, 211, 102, 0.8);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            section h2 {
+                font-size: 1.8rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .tire-grid, .services-grid, .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .floating-whatsapp {
+                width: 60px;
+                height: 60px;
+                font-size: 2rem;
+            }
+        }
+
+        /* Loading animation for images */
+        .tire-image.loading {
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>🏍️ ALMACÉN JR</h1>
+            <p>Llantas de calidad para tu moto en Ibagué</p>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#llantas">Llantas</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero" id="inicio">
+        <div class="container">
+            <h2>La mejor selección de llantas para motos</h2>
+            <p>Calidad, variedad y el mejor servicio en Ibagué, Tolima</p>
+        </div>
+    </section>
+
+    <section id="llantas">
+        <div class="container">
+            <h2>Nuestro Catálogo de Llantas</h2>
+            <div class="tire-grid">
+                <!-- Rin 10 -->
+                <div class="tire-card">
+                    <div class="tire-card-header">
+                        <h3>Rin 10"</h3>
+                    </div>
+                    <div class="tire-image-container">
+                        <div class="tire-badge">Scooters</div>
+                        <img src="https://cdn.pixabay.com/photo/2016/11/29/03/38/wheel-1867285_1280.jpg" 
+                             alt="Llantas Rin 10 para Scooters" 
+                             class="tire-image"
+                             onerror="this.src='https://cdn.pixabay.com/photo/2017/08/06/17/58/wheel-2594836_1280.jpg'">
+                    </div>
+                    <div class="tire-content">
+                        <ul class="tire-list">
+                            <li>
+                                <span class="tire-brand">Michelin City Grip</span>
+                                <span class="tire-price">Consultar</span>
+                            </li>
+                            <li>
+                                <span class="tire-brand">Pirelli SL26</span>
+                                <span class="tire-price">Consultar</span>
+                            </li>
+                            <li>
+                                <span class="tire-brand">IRC MB520</span>
+                                <span class="tire-price">Consultar</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Rin 14 -->
+                <div class="tire-card">
+                    <div class="tire-card-header">
+                        <h3>Rin 14"</h3>
+                    </div>
+                    <div class="tire-image-container">
+                        <div class="tire-badge">Urbanas</div>
+                        <img src="https://cdn.pixabay.com/photo/2017/08/06/17/58/wheel-2594836_1280.jpg" 
+                             alt="Llantas Rin 14 para motos urbanas" 
+                             class="tire-image"
+                             onerror="this.src='https://cdn.pixabay.com/photo/2016/11/21/16/03/automotive-1846910_1280.jpg'">
+                    </div>
+                    <div class="tire-content">
+                        <ul class="tire-list">
+                            <li>
+                                <span class="tire-brand">Dunlop D307</span>
+                                <span class="tire-price">Consultar</span>
+                            </li>
+                            <li>
+                                <span class="tire-brand">Bridgestone Hoop</span>
+                                <span class="tire-price">Consultar</span>
+                            </li>
+                            <li>
+                                <span class="tire-brand">Maxxis M6029</span>
+                                <span class="tire-price">Consultar</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Rin 17 -->
+                <div class="tire-card">
+                    <div class="tire-card-header">
+                        <h3>Rin 17"</h3>
+                    </div>
+                    <div class="tire-image-container">
+                        <div class="tire-badge">Deportivas</div>
+                        <img src="https://cdn.pixabay.com/photo/2016/04/01/09/51/car-1299313_1280.png" 
+                             alt="Llantas Rin 17 deportivas" 
+                             class="tire-image"
+                             onerror="this.src='https://cdn.pixabay.com/photo/2014/12/21/23/36/wheel-576777_1280.png'">
+                    </div>
+                    <div class="tire-content">
+                        <ul class="tire-list">
+                            <li>
+                                <span class="tire-brand">Michelin Pilot Street</span>
+                                <span class="tire-price">Consultar</span>
+                            </li>
+                            <li>
+                                <span class="tire-brand">Pirelli Sport Demon</span>
+                                <span class="tire-price">Consultar</span>
+                            </li>
+                            <li>
+                                <span class="tire-brand">Dunlop TT900</span>
+                                <span class="tire-price">Consultar</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Rin 18 -->
+                <div class="tire-card">
+                    <div class="tire-card-header">
+                        <h3>Rin 18"</h3>
+                    </div>
+                    <div class="tire-image-container">
+                        <div class="tire-badge">Touring</div>
+                        <img src="https://cdn.pixabay.com/photo/2020/05/17/20/21/tires-5183600_1280.jpg" 
+                             alt="Llantas Rin 18 touring" 
+                             class="tire-image"
+                             onerror="this.src='https://cdn.pixabay.com/photo/2016/11/29/03/35/automobile-1867283_1280.jpg'">
+                    </div>
+                    <div class="tire-content">
+                        <ul class="tire-list">
+                            <li>
+                                <span class="tire-brand">Bridgestone Battlax</span>
+                                <span class="tire-price">Consultar</span>
+                            </li>
+                            <li>
+                                <span class="tire-brand">Continental ContiGo</span>
+                                <span class="tire-price">Consultar</span>
+                            </li>
+                            <li>
+                                <span class="tire-brand">Metzeler Lasertec</span>
+                                <span class="tire-price">Consultar</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Rin 19 -->
+                <div class="tire-card">
+                    <div class="tire-card-header">
+                        <h3>Rin 19"</h3>
+                    </div>
+                    <div class="tire-image-container">
+                        <div class="tire-badge">Adventure</div>
+                        <img src="https://cdn.pixabay.com/photo/2016/11/18/12/02/automotive-1834272_1280.jpg" 
+                             alt="Llantas Rin 19 adventure" 
+                             class="tire-image"
+                             onerror="this.src='https://cdn.pixabay.com/photo/2013/07/12/18/20/tire-153180_1280.png'">
+                    </div>
+                    <div class="tire-content">
+                        <ul class="tire-list">
+                            <li>
+                                <span class="tire-brand">Pirelli MT60</span>
+                                <span class="tire-price">Consultar</span>
+                            </li>
+                            <li>
+                                <span class="tire-brand">Michelin Anakee</span>
+                                <span class="tire-price">Consultar</span>
+                            </li>
+                            <li>
+                                <span class="tire-brand">Dunlop K180</span>
+                                <span class="tire-price">Consultar</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Rin 21 -->
+                <div class="tire-card">
+                    <div class="tire-card-header">
+                        <h3>Rin 21"</h3>
+                    </div>
+                    <div class="tire-image-container">
+                        <div class="tire-badge">Off-Road</div>
+                        <img src="https://cdn.pixabay.com/photo/2016/11/22/23/40/adventure-1851092_1280.jpg" 
+                             alt="Llantas Rin 21 off-road" 
+                             class="tire-image"
+                             onerror="this.src='https://cdn.pixabay.com/photo/2017/08/06/17/58/wheel-2594836_1280.jpg'">
+                    </div>
+                    <div class="tire-content">
+                        <ul class="tire-list">
+                            <li>
+                                <span class="tire-brand">Bridgestone Trail Wing</span>
+                                <span class="tire-price">Consultar</span>
+                            </li>
+                            <li>
+                                <span class="tire-brand">Continental TKC80</span>
+                                <span class="tire-price">Consultar</span>
+                            </li>
+                            <li>
+                                <span class="tire-brand">Metzeler Karoo</span>
+                                <span class="tire-price">Consultar</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="servicios">
+        <div class="container">
+            <h2>Nuestros Servicios</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🔧</div>
+                    <h3>Instalación de Llantas</h3>
+                    <p>Montaje profesional con equipos especializados</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">⚖️</div>
+                    <h3>Balanceo</h3>
+                    <p>Balanceo preciso para un mejor rendimiento</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🔄</div>
+                    <h3>Cambio de Válvulas</h3>
+                    <p>Reemplazo de válvulas para mayor seguridad</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🛠️</div>
+                    <h3>Reparación de Pinchazos</h3>
+                    <p>Servicio rápido y garantizado</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">💡</div>
+                    <h3>Asesoría Técnica</h3>
+                    <p>Te ayudamos a elegir la llanta ideal</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">📦</div>
+                    <h3>Garantía</h3>
+                    <p>Todas nuestras llantas con garantía</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto">
+        <div class="container">
+            <h2>Contáctanos</h2>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <h3><span class="contact-icon">📍</span> Ubicación</h3>
+                    <p><strong>Ibagué, Tolima</strong></p>
+                    <p>Visítanos para conocer nuestro catálogo completo y recibir asesoría personalizada</p>
+                </div>
+
+                <div class="contact-card">
+                    <h3><span class="contact-icon">📱</span> WhatsApp</h3>
+                    <p>¿Necesitas información o cotización?</p>
+                    <p><strong>Escríbenos directamente</strong></p>
+                    <a href="https://wa.me/573001234567?text=Hola%20Almacén%20JR,%20necesito%20información%20sobre%20llantas%20para%20moto" class="whatsapp-btn" target="_blank">Chatear por WhatsApp</a>
+                    <p style="margin-top: 1rem; font-size: 0.9rem; color: #666;">
+                        <em>* Actualiza el número en el código HTML</em>
+                    </p>
+                </div>
+
+                <div class="contact-card">
+                    <h3><span class="contact-icon">⏰</span> Horarios</h3>
+                    <p><strong>Lunes a Viernes:</strong><br>8:00 AM - 6:00 PM</p>
+                    <p><strong>Sábados:</strong><br>8:00 AM - 5:00 PM</p>
+                    <p><strong>Domingos:</strong><br>Cerrado</p>
+                </div>
+            </div>
+
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127334.28238345314!2d-75.23923!3d4.438889!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e38c50500eef519%3A0x5e2db4a91e638f5!2sIbagu%C3%A9%2C%20Tolima!5e0!3m2!1ses!2sco!4v1234567890"
+                    width="100%" 
+                    height="100%" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Almacén JR - Llantas para Motos | Ibagué, Tolima</p>
+            <p>Tu seguridad es nuestra prioridad 🏍️</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/573001234567?text=Hola%20Almacén%20JR,%20necesito%20información%20sobre%20llantas%20para%20moto" class="floating-whatsapp" target="_blank">
+        💬
+    </a>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -80px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, index * 100);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.tire-card, .service-card, .contact-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            observer.observe(card);
+        });
+
+        // Image loading effect
+        document.querySelectorAll('.tire-image').forEach(img => {
+            img.classList.add('loading');
+            img.addEventListener('load', function() {
+                this.classList.remove('loading');
+            });
+        });
+    </script>
+</body>
+</html>
